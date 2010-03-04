@@ -26,7 +26,7 @@ urlpatterns = patterns('basic.blog.views',
         view='category_list',
         name='blog_category_list'
     ),
-    url(r'^tags/(?P<slug>[-\w]+)/$',
+    url(r'^tags/(?P<slug>[^/]+)/$',
         view='tag_detail',
         name='blog_tag_detail'
     ),
