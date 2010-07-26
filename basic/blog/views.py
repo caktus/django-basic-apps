@@ -78,6 +78,7 @@ def post_detail(request, slug, year, month, day, **kwargs):
         date_field='publish',
         slug=slug,
         queryset=posts,
+        month_format='%m',
         **kwargs
     )
 post_detail.__doc__ = date_based.object_detail.__doc__
@@ -193,3 +194,4 @@ def search(request, template_name='blog/post_search.html'):
             message = 'Search term was too vague. Please try again.'
             context = {'message':message}
     return render_to_response(template_name, context, context_instance=RequestContext(request))
+
