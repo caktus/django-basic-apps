@@ -37,7 +37,7 @@ class Post(models.Model):
         (2, _('Public')),
     )
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), unique_for_date='publish')
+    slug = models.SlugField(_('slug'), unique_for_date='publish', max_length=100)
     author = models.ForeignKey(User, blank=True, null=True)
     body = models.TextField(_('body'), )
     tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
@@ -92,3 +92,4 @@ class BlogRoll(models.Model):
 
     def get_absolute_url(self):
         return self.url
+
