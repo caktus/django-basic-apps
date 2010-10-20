@@ -64,8 +64,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         month = self.publish.month.strftime('%m')
         day = self.publish.day.strftime('%d')
-        else:
-            day = self.publish.day
         return ('blog_detail', None, {
             'year': self.publish.year,
             'month': month,
