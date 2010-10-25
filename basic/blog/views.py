@@ -136,12 +136,13 @@ def tag_detail(request, slug, template_name = 'blog/tag_detail.html', **kwargs):
         tag
             Given tag.
     """
-    tag = get_object_or_404(Tag, name__iexact=slug)
-
+    tags = Tag.objects.filter(name__iexact=slug)
+    if len(tags) == 0:
+        raise Http404
     return list_detail.object_list(
         request,
-        queryset=TaggedItem.objects.get_by_model(Post,tag).filter(status=2),
-        extra_context={'tag': tag},
+        queryset=TaggedItem.objects.get_by_model(Post,tags).filter(status=2),
+        extra_context={'tag': tags[0]},
         template_name=template_name,
         **kwargs
     )
