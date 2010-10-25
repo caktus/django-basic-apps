@@ -139,9 +139,10 @@ def tag_detail(request, slug, template_name = 'blog/tag_detail.html', **kwargs):
     tags = Tag.objects.filter(name__iexact=slug)
     if len(tags) == 0:
         raise Http404
+    queryset = TaggedItem.objects.get_union_by_model(Post,tags).filter(status=2)
     return list_detail.object_list(
         request,
-        queryset=TaggedItem.objects.get_by_model(Post,tags).filter(status=2),
+        queryset=queryset,
         extra_context={'tag': tags[0]},
         template_name=template_name,
         **kwargs
